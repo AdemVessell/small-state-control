@@ -109,19 +109,41 @@ action, trace = ctrl.step(Signal(t=0.0, channel="loss", value=0.7))
 |--------|-------|
 | Core kernel | 263 lines |
 | Per-step latency | ~430 µs |
-| State sizes | 22–50 bytes |
+| State sizes | 14–64 bytes |
 | Dependencies | 0 |
 | Tests | 63, all passing |
 
-See `BENCHMARK_NOTE.md` for details.
+### Live-system control (real signals)
+
+PID and AIMD operators ran against real `time.perf_counter()` and
+`resource.getrusage()` measurements from actual computation on a live
+machine.  The PID targeted 1ms/step and visibly hunted around the
+target after forced perturbations — overshoot, crash, and multi-step
+recovery all captured in JSONL traces.
+
+See `BENCHMARK_NOTE.md` for full numbers and trace analysis.
+
+## Examples
+
+```bash
+# Synthetic replay scheduling (200 steps, JSONL traces)
+python examples/replay_scheduling/run_dife_real.py
+
+# Composed DIFE+AIMD (100 steps, JSONL traces)
+python examples/composition/run_composed_control.py
+
+# Live system metrics — PID + AIMD against real CPU/memory (80 steps)
+python examples/live_metrics/run_live_control.py
+```
 
 ## Intended direction
 
-The kernel is proven.  Future work includes:
+The kernel is proven with three operator families, composition, and
+live-signal control.  Next:
 
+- **Production deployment** — embed in a real system (water system telemetry, training pipeline, resource manager)
 - **Ghost Meadow** — compact mergeable probabilistic state operators
-- **GCA** — symbolic compression / operator-discovery feeding discovered operators into the kernel
-- **Real deployment** — one production signal source (training logs, sensor data, water system telemetry)
+- **GCA** — symbolic operator discovery feeding into the kernel at runtime
 - **MicroPython port** — prove the kernel runs on ESP32
 
 ## Writing a custom operator
