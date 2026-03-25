@@ -1,6 +1,6 @@
 from small_state_control.core.controller import Controller
 from small_state_control.core.operator import Operator
-from small_state_control.core.trace_store import FileTraceStore, MemoryTraceStore
+from small_state_control.core.trace_store import FileTraceStore, MemoryTraceStore, TraceStore
 from small_state_control.core.types import (
     Action,
     DictState,
@@ -19,4 +19,5 @@ __all__ = [
     "Signal",
     "StateSizeError",
     "Trace",
+    "TraceStore",
 ]
