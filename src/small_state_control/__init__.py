@@ -8,6 +8,7 @@ from small_state_control.core import (
     Signal,
     StateSizeError,
     Trace,
+    TraceStore,
 )
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "Signal",
     "StateSizeError",
     "Trace",
+    "TraceStore",
 ]

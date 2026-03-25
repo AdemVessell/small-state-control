@@ -2,8 +2,17 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Protocol
 
 from small_state_control.core.types import Trace
+
+
+class TraceStore(Protocol):
+    """Structural interface for trace persistence backends."""
+
+    def append(self, trace: Trace) -> None: ...
+    def get(self, last_n: int | None = None) -> list[Trace]: ...
+    def __len__(self) -> int: ...
 
 
 class MemoryTraceStore:

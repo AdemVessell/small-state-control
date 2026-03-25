@@ -13,7 +13,7 @@ from small_state_control.core.types import (
 )
 
 if TYPE_CHECKING:
-    from small_state_control.core.trace_store import FileTraceStore, MemoryTraceStore
+    from small_state_control.core.trace_store import TraceStore
 
 
 class Controller:
@@ -23,7 +23,7 @@ class Controller:
         initial_state: DictState,
         controller_id: str = "default",
         state_cap_bytes: int = 4096,
-        trace_store: MemoryTraceStore | FileTraceStore | None = None,
+        trace_store: TraceStore | None = None,
     ) -> None:
         self._operator = operator
         self._state = initial_state
