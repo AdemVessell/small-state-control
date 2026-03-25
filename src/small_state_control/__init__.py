@@ -6,6 +6,7 @@ from small_state_control.core import (
     MemoryTraceStore,
     Operator,
     Signal,
+    StateSizeError,
     Trace,
 )
 
@@ -17,5 +18,6 @@ __all__ = [
     "MemoryTraceStore",
     "Operator",
     "Signal",
+    "StateSizeError",
     "Trace",
 ]
